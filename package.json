@@ -1,0 +1,26 @@
+{
+  "name": "stickman-assignment-backend",
+  "version": "1.0.0",
+  "description": "RESTful API for user authentication",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daemon1024/stickman-assignment-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daemon1024/stickman-assignment-backend/issues"
+  },
+  "homepage": "https://github.com/daemon1024/stickman-assignment-backend#readme"
+}
