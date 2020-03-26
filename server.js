@@ -27,9 +27,30 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+app.get("/user/:id", (req, res) => {
+  const id = req.params.id;
+  Users.findById(id, (err, usr) => {
+    if (err) {
+      res.send({ error: "An error has occurred" });
+    } else {
+      res.send(usr);
+    }
+  });
+});
 app.post("/signup", (req, res) => {
   console.log(req.body);
-  res.send("Hello");
+  const note = {
+    nickname: req.body.nickname,
+    email: req.body.email,
+    password: req.body.password
+  };
+  Users.create(note, (err, result) => {
+    if (err) {
+      res.send({ error: "An error has occurred" });
+    } else {
+      res.send(result._id);
+    }
+  });
 });
 app.listen(port, () => {
   console.log("We are live on " + port);
