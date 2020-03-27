@@ -7,7 +7,7 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, "./uploads/");
+    cb(null, "/uploads/");
   },
   filename: function(req, file, cb) {
     cb(null, new Date().toISOString() + file.originalname);
@@ -74,8 +74,7 @@ router.post("/login", (req, res) => {
       bcrypt.compare(req.body.password, user[0].password, (err, result) => {
         const token = jwt.sign(
           {
-            email: user[0].email,
-            userId: user[0]._id
+            image: user[0].image
           },
           "xyz",
           {
@@ -89,13 +88,7 @@ router.post("/login", (req, res) => {
           });
         }
         if (result) {
-          // res.status(200).json({
-          //   message: "Auth successful",
-          //   token: token
-          // });
-          // console.log(res);
-          // res.body.token = token;
-          return res.redirect(200, "/user/pic?token=" + token);
+          return res.redirect(200, "/user/image?token=" + token);
         }
         res.status(401).json({
           message: "Auth failed"
