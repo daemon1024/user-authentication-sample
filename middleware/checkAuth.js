@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken");
 module.exports = (req, res, next) => {
+  console.log("initiating auth . .. ");
   try {
-    const decoded = jwt.verify(req.body.token, "xyz");
+    const decoded = jwt.verify(req.query.token, "xyz");
     req.userData = decoded;
     next();
   } catch (error) {

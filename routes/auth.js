@@ -60,10 +60,13 @@ router.post("/login", (req, res) => {
           });
         }
         if (result) {
-          return res.status(200).json({
-            message: "Auth successful",
-            token: token
-          });
+          // res.status(200).json({
+          //   message: "Auth successful",
+          //   token: token
+          // });
+          // console.log(res);
+          // res.body.token = token;
+          return res.redirect(200, "/user/pic?token=" + token);
         }
         res.status(401).json({
           message: "Auth failed"
