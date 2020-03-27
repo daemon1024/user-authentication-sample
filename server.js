@@ -17,7 +17,7 @@ const app = express();
 const userAuth = require("./routes/auth");
 const userRoute = require("./routes/user");
 
-const port = 4096;
+const port = process.env.PORT || 4096;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", userAuth);
