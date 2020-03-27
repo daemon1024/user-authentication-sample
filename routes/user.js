@@ -35,17 +35,38 @@ router.post("/signup", (req, res) => {
     });
 });
 router.post("/login", (req, res) => {
-  const user = {
-    nickname: req.body.nickname,
-    email: req.body.email,
-    password: req.body.password
-  };
-  Users.findOne(user, (err, result) => {
-    if (err) {
-      res.send({ error: "Error has occured" });
-    } else {
-      res.send(result ? result._id : "not found");
-    }
-  });
+  User.find({ email: req.body.email })
+    .exec()
+    .then(user => {
+      if (!user.length) {
+        return res.status(401).json({
+          message: "Auth failed"
+        });
+      }
+      bcrypt.compare(req.body.password, user[0].password, (err, result) => {
+        console.log(req.body, user[0]);
+        if (err) {
+          console.log(err);
+          return res.status(401).json({
+            message: "Auth failed"
+          });
+        }
+        console.log(result);
+        if (result) {
+          return res.status(200).json({
+            message: "Auth successful"
+          });
+        }
+        res.status(401).json({
+          message: "Auth failed"
+        });
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
 });
 module.exports = router;
