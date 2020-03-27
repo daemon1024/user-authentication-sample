@@ -3,8 +3,36 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const multer = require("multer");
 
-router.post("/signup", (req, res) => {
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, "./uploads/");
+  },
+  filename: function(req, file, cb) {
+    cb(null, new Date().toISOString() + file.originalname);
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  // reject a file
+  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+const fileUpload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 16
+  },
+  fileFilter: fileFilter
+});
+
+router.post("/signup", fileUpload.single("image"), (req, res) => {
+  console.log(req.file);
   User.find({ email: req.body.email })
     .exec()
     .then(user => {
@@ -20,7 +48,8 @@ router.post("/signup", (req, res) => {
             const user = new User({
               nickname: req.body.nickname,
               email: req.body.email,
-              password: hash
+              password: hash,
+              image: req.file.path
             });
             user
               .save()
