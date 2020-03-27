@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const checkAuth = require("./middleware/checkAuth");
 
 mongoose
   .connect("mongodb://localhost:27017/stickman_backend", {
@@ -11,12 +12,12 @@ mongoose
   .catch(err => console.error("Connection error", err));
 
 const app = express();
-const userRoutes = require("./routes/user");
+const userAuth = require("./routes/auth");
 
 const port = 4096;
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/user", userRoutes);
+app.use("/", userAuth);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
