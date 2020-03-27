@@ -3,10 +3,13 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
 mongoose
-  .connect("mongodb://localhost:27017/stickman_backend", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
+  .connect(
+    "mongodb://barun:helloworld@cluster0-shard-00-00-e6kxz.mongodb.net:27017,cluster0-shard-00-01-e6kxz.mongodb.net:27017,cluster0-shard-00-02-e6kxz.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }
+  )
   .then(() => console.log("Successfully connect to MongoDB."))
   .catch(err => console.error("Connection error", err));
 
