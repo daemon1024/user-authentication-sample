@@ -59,7 +59,7 @@ router.post("/signup", fileUpload.single("image"), (req, res) => {
             });
             user
               .save()
-              .then(result => res.status(201).json(result))
+              .then(result => res.redirect(200, "/example/login"))
               .catch(
                 err => console.log(err) && res.status(500).json({ error: err })
               );
