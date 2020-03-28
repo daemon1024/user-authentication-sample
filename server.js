@@ -23,6 +23,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", userAuth);
 app.use("/user", userRoute);
 
+app.get("/example/signup", (req, res) => {
+  res.sendFile(__dirname + "/example/signup.html");
+});
+app.get("/example/login", (req, res) => {
+  res.sendFile(__dirname + "/example/login.html");
+});
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });

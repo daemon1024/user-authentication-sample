@@ -7,10 +7,10 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, "/uploads/");
+    cb(null, "./routes/uploads/");
   },
   filename: function(req, file, cb) {
-    cb(null, new Date().toISOString() + file.originalname);
+    cb(null, new Date().toISOString().replace(/:/g, "-") + file.originalname);
   }
 });
 
@@ -37,7 +37,7 @@ router.get("/signup", (req, res) => {
   );
 });
 router.post("/signup", fileUpload.single("image"), (req, res) => {
-  console.log(req.file);
+  console.log(req);
   User.find({ email: req.body.email })
     .exec()
     .then(user => {
@@ -98,7 +98,7 @@ router.post("/login", (req, res) => {
           });
         }
         if (result) {
-          return res.redirect(200, "/user/image?token=" + token);
+          return res.redirect("/user/image?token=" + token);
         }
         res.status(401).json({
           message: "Auth failed"
