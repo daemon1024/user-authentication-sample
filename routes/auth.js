@@ -31,11 +31,11 @@ const fileUpload = multer({
   fileFilter: fileFilter
 });
 
-router.get("/signup", (req, res) => {
-  res.send(
-    "Send a post request with email, nickname , password and image as formdata part of request body."
-  );
-});
+// router.get("/signup", (req, res) => {
+//   res.send(
+//     "Send a post request with email, nickname , password and image as formdata part of request body."
+//   );
+// });
 router.post("/signup", fileUpload.single("image"), (req, res) => {
   console.log(req);
   User.find({ email: req.body.email })
@@ -67,11 +67,11 @@ router.post("/signup", fileUpload.single("image"), (req, res) => {
       }
     });
 });
-router.get("/login", (req, res) => {
-  res.send(
-    "Send a post request with email, nickname and password part of request body."
-  );
-});
+// router.get("/login", (req, res) => {
+//   res.send(
+//     "Send a post request with email, nickname and password part of request body."
+//   );
+// });
 router.post("/login", (req, res) => {
   User.find({ email: req.body.email })
     .exec()
