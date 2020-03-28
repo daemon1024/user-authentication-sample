@@ -43,9 +43,7 @@ router.post("/signup", fileUpload.single("image"), (req, res) => {
     .exec()
     .then(user => {
       if (user.length) {
-        return res.json({
-          message: "E-Mail exists"
-        });
+        return res.redirect(409, "/example/login");
       } else {
         bcrypt.hash(req.body.password, 7, (err, hash) => {
           if (err) {
@@ -80,9 +78,7 @@ router.post("/login", (req, res) => {
     .exec()
     .then(user => {
       if (!user.length) {
-        return res.status(401).json({
-          message: "Auth failed"
-        });
+        return res.redirect(401, "/example/login");
       }
       bcrypt.compare(req.body.password, user[0].password, (err, result) => {
         const token = jwt.sign(
@@ -96,16 +92,12 @@ router.post("/login", (req, res) => {
         );
         if (err) {
           console.log(err);
-          return res.status(401).json({
-            message: "Auth failed"
-          });
+          return res.redirect(500, "/example/login");
         }
         if (result) {
           return res.redirect("/user/image?token=" + token);
         }
-        res.status(401).json({
-          message: "Auth failed"
-        });
+        res.redirect(401, "/example/login");
       });
     })
     .catch(err => {

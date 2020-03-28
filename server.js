@@ -29,8 +29,11 @@ app.get("/example/signup", (req, res) => {
 app.get("/example/login", (req, res) => {
   res.sendFile(__dirname + "/example/login.html");
 });
-app.get("/", (req, res) => {
+app.get("/help", (req, res) => {
   res.sendFile(__dirname + "/README.md");
+});
+app.get("/", (req, res) => {
+  res.redirect("/example/signup");
 });
 
 app.listen(port, () => {
