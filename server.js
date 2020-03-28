@@ -30,7 +30,7 @@ app.get("/example/login", (req, res) => {
   res.sendFile(__dirname + "/example/login.html");
 });
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.sendFile(__dirname + "/README.md");
 });
 
 app.listen(port, () => {

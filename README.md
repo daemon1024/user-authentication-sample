@@ -4,6 +4,8 @@ RESTful API for user authentication made using Node, Express and MongoDB.
 
 API hosted at https://api-stickman-assignment.herokuapp.com/ .
 
+To test the API head to routes `/example/login` or `/example/signup`
+
 ## API routes
 
 - ### /signup
@@ -28,6 +30,7 @@ API hosted at https://api-stickman-assignment.herokuapp.com/ .
             Info for POST req parameters
 
 - ### /user/image
+
         Protected route, needs token as query parameter
 
         GET
