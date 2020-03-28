@@ -8,7 +8,7 @@ To test the API head to routes `/example/login` or `/example/signup`
 
 ## API routes
 
-- ### /signup
+- ### `/signup`
 
         POST
             email
@@ -19,7 +19,7 @@ To test the API head to routes `/example/login` or `/example/signup`
         GET
             Info for POST req parameters
 
-- ### /login
+- ### `/login`
 
         POST > redirects to /user/image with token authorisation
             email
@@ -29,7 +29,7 @@ To test the API head to routes `/example/login` or `/example/signup`
         GET
             Info for POST req parameters
 
-- ### /user/image
+- ### `/user/image`
 
         Protected route, needs token as query parameter
 
